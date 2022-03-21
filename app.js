@@ -12,7 +12,12 @@ app.use(bodyParser.json());
 // Import Routes
 const postsRoute = require('./routes/posts');
 
+const authRoute = require('./routes/auth');
+
 app.use('/posts',postsRoute);
+
+//Route Middleware
+app.use('/api/user', authRoute);
 
 // Connect To DB
 mongoose.connect(process.env.DB_CONNECTION,(err) => {
