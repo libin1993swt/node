@@ -16,9 +16,6 @@ const authRoute = require('./routes/auth');
 
 app.use('/posts',postsRoute);
 
-//Route Middleware
-app.use('/api/user', authRoute);
-
 // Connect To DB
 mongoose.connect(process.env.DB_CONNECTION,(err) => {
     console.log(process.env.DB_CONNECTION);
@@ -28,6 +25,12 @@ mongoose.connect(process.env.DB_CONNECTION,(err) => {
         console.log('[mongo connected]');
     }
 });
+
+// Middleware
+app.use(express.json());
+
+//Route Middleware
+app.use('/api/user', authRoute);
 
 // How to we start listen to the server
 app.listen(PORT, () => {
